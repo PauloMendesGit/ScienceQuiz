@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 //import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quiz_brain.dart';
@@ -36,8 +38,8 @@ class ScienceQuizPage extends StatefulWidget {
 class _ScienceQuizPageState extends State<ScienceQuizPage> {
   List<Icon> scoreKeeper = [];
 
-  void checkAnswer(bool userPickedAnswer) {
-    bool correctAnswer = quizBrain.getCorrectAnswer();
+  void checkAnswer(String userPickedAnswer) {
+    String correctAnswer = quizBrain.getCorrectAnswer();
 
     setState(() {
       //TODO: Step 4 - Use IF/ELSE to check if we've reached the end of the quiz. If so,
@@ -108,46 +110,35 @@ class _ScienceQuizPageState extends State<ScienceQuizPage> {
             ),
           ),
         ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: TextButton(
-              child: Text(
-                'True',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                ),
-              ),
-              onPressed: () {
-                //The user picked true.
-                checkAnswer(true);
-              },
-            ),
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: TextButton(
-              child: Text(
-                'False',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
-                ),
-              ),
-              onPressed: () {
-                //The user picked false.
-                checkAnswer(false);
-              },
-            ),
-          ),
-        ),
+        answerButton(0),
+        answerButton(1),
+        answerButton(2),
+        answerButton(3),
         Row(
           children: scoreKeeper,
         )
       ],
+    );
+  }
+
+  Widget answerButton(int questionNumber) {
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.all(15.0),
+        child: TextButton(
+          child: Text(
+            quizBrain.getQuestionOptions()[questionNumber],
+            style: TextStyle(
+              fontSize: 20.0,
+              color: Colors.white,
+            ),
+          ),
+          onPressed: () {
+//The user picked false.
+            checkAnswer(quizBrain.getQuestionOptions()[questionNumber]);
+          },
+        ),
+      ),
     );
   }
 }

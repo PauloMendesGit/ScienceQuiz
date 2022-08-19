@@ -1,34 +1,30 @@
+import 'dart:ffi';
+
 import 'question.dart';
 
 class QuizBrain {
   int _questionNumber = 0;
 
   List<Question> _questionBank = [
-    Question('Some cats are actually allergic to humans', true),
-    Question('You can lead a cow down stairs but not up stairs.', false),
-    Question('Approximately one quarter of human bones are in the feet.', true),
-    Question('A slug\'s blood is green.', true),
-    Question('Buzz Aldrin\'s mother\'s maiden name was \"Moon\".', true),
-    Question('It is illegal to pee in the Ocean in Portugal.', true),
+    Question('What does DNA stand for?', ["Deoxyribonucleic acid", "Deoxyribonucleic acid 2", "Deoxyribonucleic acid 3", "Deoxyribonucleic acid 4"], "Deoxyribonucleic acid"),
+    Question('You can lead a cow down stairs but not up stairs.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
+    Question('Approximately one quarter of human bones are in the feet.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
+    Question('A slug\'s blood is green.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
+    Question('Buzz Aldrin\'s mother\'s maiden name was \"Moon\".', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
+    Question('It is illegal to pee in the Ocean in Portugal.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
     Question(
-        'No piece of square dry paper can be folded in half more than 7 times.',
-        false),
+        'No piece of square dry paper can be folded in half more than 7 times.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
     Question(
-        'In London, UK, if you happen to die in the House of Parliament, you are technically entitled to a state funeral, because the building is considered too sacred a place.',
-        true),
+        'In London, UK, if you happen to die in the House of Parliament, you are technically entitled to a state funeral, because the building is considered too sacred a place.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
     Question(
-        'The loudest sound produced by any animal is 188 decibels. That animal is the African Elephant.',
-        false),
+        'The loudest sound produced by any animal is 188 decibels. That animal is the African Elephant.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
     Question(
-        'The total surface area of two human lungs is approximately 70 square metres.',
-        true),
-    Question('Google was originally called \"Backrub\".', true),
+        'The total surface area of two human lungs is approximately 70 square metres.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
+    Question('Google was originally called \"Backrub\".', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
     Question(
-        'Chocolate affects a dog\'s heart and nervous system; a few ounces are enough to kill a small dog.',
-        true),
+        'Chocolate affects a dog\'s heart and nervous system; a few ounces are enough to kill a small dog.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
     Question(
-        'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
-        true),
+        'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
   ];
 
   void nextQuestion() {
@@ -41,7 +37,11 @@ class QuizBrain {
     return _questionBank[_questionNumber].questionText;
   }
 
-  bool getCorrectAnswer() {
+  List<String> getQuestionOptions() {
+    return _questionBank[_questionNumber].questionOptions;
+  }
+
+  String getCorrectAnswer() {
     return _questionBank[_questionNumber].questionAnswer;
   }
 
