@@ -25,7 +25,7 @@ class QuizBrain {
     Question('What term discribes an organism that can survive without oxygen?', ["Allotrope", "Inorganic", "Anaerobic", "Thylakoid"], "Anaerobic"),
     Question('Which physics law is known as the "law of action and reaction?"', ["Newton's First Law", "Newton's Third Law", "Newton's Second Law", "Murphy's Law"], "Newton's Third Law"),
     Question('What does the "N" stand for in DNA?', ["Nucleic", "Nesting", "Neutrino", "Neo-Alkane"], "Nucleic"),
-    Question('The ongoing mass extinction event cause my human activity is known as _.', ["Olson's Extinction", "Holocene Extinction", "Mulde Event", "Great Oxygenation Event"], "Holocene Extinction"),
+    Question('The ongoing mass extinction event caused by human activity is known as _.', ["Olson's Extinction", "Holocene Extinction", "Mulde Event", "Great Oxygenation Event"], "Holocene Extinction"),
   ];
 
   void nextQuestion() {

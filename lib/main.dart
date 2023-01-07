@@ -86,10 +86,10 @@ class _ScienceQuizPageState extends State<ScienceQuizPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  answerButton(0, false),
-                  answerButton(1, false),
-                  answerButton(2, false),
-                  answerButton(3, false),
+                  answerButton(0),
+                  answerButton(1),
+                  answerButton(2),
+                  answerButton(3),
                 ],
               ),
             ),
@@ -100,11 +100,11 @@ class _ScienceQuizPageState extends State<ScienceQuizPage> {
         ));
   }
 
-  Widget answerButton(int questionNumber, bool wasPressed) {
+  Widget answerButton(int answerNumber) {
     var defaultButtonColor = Color.fromRGBO(32, 30, 63, 1);
     var correctAnswerColor = Color.fromRGBO(0, 190, 180, 1);
     var wrongAnswerColor = Color.fromRGBO(200, 55, 70, 1);
-    var isCorrect = true;
+    var isCorrect = false;
 
     return Expanded(
         child: Padding(
@@ -120,26 +120,30 @@ class _ScienceQuizPageState extends State<ScienceQuizPage> {
               ),
 
               child: Text(
-                quizBrain.getQuestionOptions()[questionNumber],
+                quizBrain.getQuestionOptions()[answerNumber],
                 style: TextStyle(fontSize: 24),
               ),
               onPressed: () => setState(() {
-                isCorrect = checkAnswer(quizBrain.getQuestionOptions()[questionNumber]);
+                isCorrect = checkAnswer(quizBrain.getQuestionOptions()[answerNumber]);
                 print(isCorrect);
+                print(widget.hashCode);
                 if (isCorrect) {
                   currentButtonColor = correctAnswerColor;
-                  setState(() {});
                 } else {
                   currentButtonColor = wrongAnswerColor;
-                  setState(() {});
                 }
 
                 Timer(const Duration(seconds: 2), () {
+                  print('CONTEXT $context');
                   print('Next Question Please');
-                  quizBrain.nextQuestion();
                   setState(() {
                     currentButtonColor = defaultButtonColor;
                   });
+                  if (quizBrain.isFinished()) {
+                    quizBrain.reset();
+                  } else {
+                    quizBrain.nextQuestion();
+                  }
                 });
               }
 
