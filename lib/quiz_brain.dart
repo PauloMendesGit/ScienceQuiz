@@ -6,25 +6,26 @@ class QuizBrain {
   int _questionNumber = 0;
 
   List<Question> _questionBank = [
-    Question('What does DNA stand for?', ["Deoxyribonucleic acid", "Deoxyribonucleic acid 2", "Deoxyribonucleic acid 3", "Deoxyribonucleic acid 4"], "Deoxyribonucleic acid"),
-    Question('You can lead a cow down stairs but not up stairs.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
-    Question('Approximately one quarter of human bones are in the feet.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
-    Question('A slug\'s blood is green.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
-    Question('Buzz Aldrin\'s mother\'s maiden name was \"Moon\".', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
-    Question('It is illegal to pee in the Ocean in Portugal.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
-    Question(
-        'No piece of square dry paper can be folded in half more than 7 times.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
-    Question(
-        'In London, UK, if you happen to die in the House of Parliament, you are technically entitled to a state funeral, because the building is considered too sacred a place.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
-    Question(
-        'The loudest sound produced by any animal is 188 decibels. That animal is the African Elephant.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
-    Question(
-        'The total surface area of two human lungs is approximately 70 square metres.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
-    Question('Google was originally called \"Backrub\".', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
-    Question(
-        'Chocolate affects a dog\'s heart and nervous system; a few ounces are enough to kill a small dog.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
-    Question(
-        'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.', ["Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid", "Deoxyribonucleic acid"], "Deoxyribonucleic acid"),
+    Question('Which material is the best heat conductor', ["Steel", "Diamond", "Lithium", "Copper"], "Diamond"),
+    Question('The moon is _% the size of Earth.', ["2%", "18%", "10%", "27%"], "27%"),
+    Question('Which gas is responsible for the ripening of fruit?', ["Carbon Monoxide", "Methane", "Ethylene", "Phosphine"], "Ethylene"),
+    Question('What is another way of writing "3 x 2 x 1"?', ["3!", "3∑", "3^", "3∫˙"], "3!"),
+    Question('Which is a vertebrate?', ["Coral", "Jellyfish", "Eel", "Octopus"], "Eel"),
+    Question('The "atomic number" is the number of _ found in every atom of a chemical element.', ["Electrons", "Molecules", "Isotopes", "Protons"], "Protons"),
+    Question('Charles Babbage is considered the father of the _.', ["Battery", "Computer", "Chaos Theory", "Periodic Table"], "Computer"),
+    Question('In the human body, the pineal gland releases which hormone?', ["Adrenaline", "Melatonin", "Cortisol", "Testosterone"], "Melatonin"),
+    Question('A tesseract is a 4-dimensional equivalent of a _.', ["Cube", "Hexagon", "Helix", "Star Polygon"], "Cube"),
+    Question('You disagree with an idea being discussed in a group but stay quiet out of conformity. This is called _.', ["Anthropocentric Thinking", "Your Job", "Barnum Effect", "Groupthink"], "Groupthink"),
+    Question('What time system has days that last 23 h 56 min 4 s?', ["Binary clock", "Roman", "Ephemeris", "Sideral"], "Sideral"),
+    Question('The difference between speed and velocity is that velocity also considers _.', ["Acceleration", "Gravity", "Direction", "Tangent"], "Direction"),
+    Question('Which organism has the highest number of chromosomes?', ["Human", "Pidgeon", "Lion", "Strawberry"], "Pidgeon"),
+    Question('In geometry, what do you call a point where two or more lines meet?', ["Azimuth", "Tessellation", "Segment", "Vertex"], "Vertex"),
+    Question('Anemophily is pollination by _.', ["Wind", "Insects", "Water", "Anemones"], "Wind"),
+    Question('What do you call pieces of rock thrown into the air during a volcanic eruption?', ["Tephra", "Lahar", "Magma", "Fumarole"], "Tephra"),
+    Question('What term discribes an organism that can survive without oxygen?', ["Allotrope", "Inorganic", "Anaerobic", "Thylakoid"], "Anaerobic"),
+    Question('Which physics law is known as the "law of action and reaction?"', ["Newton's First Law", "Newton's Third Law", "Newton's Second Law", "Murphy's Law"], "Newton's Third Law"),
+    Question('What does the "N" stand for in DNA?', ["Nucleic", "Nesting", "Neutrino", "Neo-Alkane"], "Nucleic"),
+    Question('The ongoing mass extinction event cause my human activity is known as _.', ["Olson's Extinction", "Holocene Extinction", "Mulde Event", "Great Oxygenation Event"], "Holocene Extinction"),
   ];
 
   void nextQuestion() {

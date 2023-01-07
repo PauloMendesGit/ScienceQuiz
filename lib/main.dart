@@ -1,8 +1,8 @@
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 //import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quiz_brain.dart';
+import 'dart:async';
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -20,10 +20,7 @@ class ScienceQuiz extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.grey.shade900,
         body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: ScienceQuizPage(),
-          ),
+          child: ScienceQuizPage(),
         ),
       ),
     );
@@ -37,108 +34,117 @@ class ScienceQuizPage extends StatefulWidget {
 
 class _ScienceQuizPageState extends State<ScienceQuizPage> {
   List<Icon> scoreKeeper = [];
+  late AnimationController _animationController;
+  late Animation _colorTween;
+  var currentButtonColor = Color.fromRGBO(32, 30, 63, 1);
 
-  void checkAnswer(String userPickedAnswer) {
+  bool checkAnswer(String userPickedAnswer) {
     String correctAnswer = quizBrain.getCorrectAnswer();
+    //TODO: Step 6 - If we've not reached the end, ELSE do the answer checking steps below
+    if (userPickedAnswer == correctAnswer) {
+      return true;
+    } else {
+      return false;
+    }
 
-    setState(() {
-      //TODO: Step 4 - Use IF/ELSE to check if we've reached the end of the quiz. If so,
-      //On the next line, you can also use if (quizBrain.isFinished()) {}, it does the same thing.
-      if (quizBrain.isFinished() == true) {
-        //TODO Step 4 Part A - show an alert using rFlutter_alert,
-
-        //This is the code for the basic alert from the docs for rFlutter Alert:
-        //Alert(context: context, title: "RFLUTTER", desc: "Flutter is awesome.").show();
-
-        //Modified for our purposes:
-        AlertDialog(
-            title: const Text('AlertDialog Title'),
-            content: SingleChildScrollView(
-              child: ListBody(
-              children: const <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
-      )
-            )
-        );
-
-        //TODO Step 4 Part C - reset the questionNumber,
-        quizBrain.reset();
-
-        //TODO Step 4 Part D - empty out the scoreKeeper.
-        scoreKeeper = [];
-      }
-
-      //TODO: Step 6 - If we've not reached the end, ELSE do the answer checking steps below 👇
-      else {
-        if (userPickedAnswer == correctAnswer) {
-          scoreKeeper.add(Icon(
-            Icons.check,
-            color: Colors.green,
-          ));
-        } else {
-          scoreKeeper.add(Icon(
-            Icons.close,
-            color: Colors.red,
-          ));
-        }
         quizBrain.nextQuestion();
-      }
-    });
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Expanded(
-          flex: 5,
-          child: Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Center(
-              child: Text(
-                quizBrain.getQuestionText(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white,
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    return  Container(
+        color:  Color.fromRGBO(23, 21, 43, 1),
+        width: width,
+        height: height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              flex: 4,
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Center(
+                  child: Text(
+                    quizBrain.getQuestionText(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-        answerButton(0),
-        answerButton(1),
-        answerButton(2),
-        answerButton(3),
-        Row(
-          children: scoreKeeper,
-        )
-      ],
-    );
+            Expanded(
+              flex: 4,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  answerButton(0, false),
+                  answerButton(1, false),
+                  answerButton(2, false),
+                  answerButton(3, false),
+                ],
+              ),
+            ),
+            Row(
+              children: scoreKeeper,
+            )
+          ],
+        ));
   }
 
-  Widget answerButton(int questionNumber) {
+  Widget answerButton(int questionNumber, bool wasPressed) {
+    var defaultButtonColor = Color.fromRGBO(32, 30, 63, 1);
+    var correctAnswerColor = Color.fromRGBO(0, 190, 180, 1);
+    var wrongAnswerColor = Color.fromRGBO(200, 55, 70, 1);
+    var isCorrect = true;
+
     return Expanded(
-      child: Padding(
-        padding: EdgeInsets.all(15.0),
-        child: TextButton(
-          child: Text(
-            quizBrain.getQuestionOptions()[questionNumber],
-            style: TextStyle(
-              fontSize: 20.0,
-              color: Colors.white,
-            ),
+        child: Padding(
+          padding: EdgeInsets.all(15.0),
+          child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(currentButtonColor),
+                overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                      (Set<MaterialState> states) {
+                        return currentButtonColor;
+                      }
+                ),
+              ),
+
+              child: Text(
+                quizBrain.getQuestionOptions()[questionNumber],
+                style: TextStyle(fontSize: 24),
+              ),
+              onPressed: () => setState(() {
+                isCorrect = checkAnswer(quizBrain.getQuestionOptions()[questionNumber]);
+                print(isCorrect);
+                if (isCorrect) {
+                  currentButtonColor = correctAnswerColor;
+                  setState(() {});
+                } else {
+                  currentButtonColor = wrongAnswerColor;
+                  setState(() {});
+                }
+
+                Timer(const Duration(seconds: 2), () {
+                  print('Next Question Please');
+                  quizBrain.nextQuestion();
+                  setState(() {
+                    currentButtonColor = defaultButtonColor;
+                  });
+                });
+              }
+
+              )
           ),
-          onPressed: () {
-//The user picked false.
-            checkAnswer(quizBrain.getQuestionOptions()[questionNumber]);
-          },
-        ),
-      ),
-    );
+        ));
   }
 }
