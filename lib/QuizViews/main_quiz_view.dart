@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../QuizViewModel/quiz_brain.dart';
+import 'package:sciencequiz/question.dart';
 import 'dart:async';
 
 final QuizBrain quizBrain = QuizBrain();
@@ -17,12 +18,10 @@ class _MainQuizViewState extends State<MainQuizView> {
   var forthButtonColorDefault = Color.fromRGBO(32, 30, 63, 1);
   var defaultButtonColor = Color.fromRGBO(32, 30, 63, 1);
   var areActionsEnabled = true;
-  var isSecondEnabled = true;
-  var isThirdEnabled = true;
-  var isForthEnabled = true;
+  List<Question> quizChallenge = quizBrain.getQuizChallenge(20);
 
   bool checkAnswer(String userPickedAnswer) {
-    String correctAnswer = quizBrain.getCorrectAnswer();
+    String correctAnswer = quizBrain.getCorrectAnswer(quizChallenge);
     if (userPickedAnswer == correctAnswer) {
       return true;
     } else {
@@ -54,10 +53,10 @@ class _MainQuizViewState extends State<MainQuizView> {
                 padding: EdgeInsets.all(10.0),
                 child: Center(
                   child: Text(
-                    quizBrain.getQuestionText(),
+                    quizBrain.getQuestionText(quizChallenge),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      fontSize: 25.0,
+                      fontSize: 28.0,
                       color: Colors.white
                     ),
                   ),
@@ -110,12 +109,12 @@ class _MainQuizViewState extends State<MainQuizView> {
               ),
 
               child: Text(
-                quizBrain.getQuestionOptions()[buttonNumber],
+                quizBrain.getQuestionOptions(quizChallenge)[buttonNumber],
                 style: TextStyle(fontSize: 24),
               ),
               onPressed: areActionsEnabled ? () => setState(() {
                 areActionsEnabled = false;
-                isCorrect = checkAnswer(quizBrain.getQuestionOptions()[buttonNumber]);
+                isCorrect = checkAnswer(quizBrain.getQuestionOptions(quizChallenge)[buttonNumber]);
                 print(isCorrect);
                 if (isCorrect) {
                   firstButtonColorDefault = correctAnswerColor;
@@ -129,10 +128,10 @@ class _MainQuizViewState extends State<MainQuizView> {
                   setState(() {
                     firstButtonColorDefault = defaultButtonColor;
                   });
-                  if (quizBrain.isFinished()) {
+                  if (quizBrain.isFinished(quizChallenge)) {
                     quizBrain.reset();
                   } else {
-                    quizBrain.nextQuestion();
+                    quizBrain.nextQuestion(quizChallenge);
                   }
                 });
               }) : null),
@@ -158,12 +157,12 @@ class _MainQuizViewState extends State<MainQuizView> {
               ),
 
               child: Text(
-                quizBrain.getQuestionOptions()[buttonNumber],
+                quizBrain.getQuestionOptions(quizChallenge)[buttonNumber],
                 style: TextStyle(fontSize: 24),
               ),
               onPressed: areActionsEnabled ? () => setState(() {
                 areActionsEnabled = false;
-                isCorrect = checkAnswer(quizBrain.getQuestionOptions()[buttonNumber]);
+                isCorrect = checkAnswer(quizBrain.getQuestionOptions(quizChallenge)[buttonNumber]);
                 print(isCorrect);
                 if (isCorrect) {
                   secondButtonColorDefault = correctAnswerColor;
@@ -178,10 +177,10 @@ class _MainQuizViewState extends State<MainQuizView> {
                   setState(() {
                     secondButtonColorDefault = defaultButtonColor;
                   });
-                  if (quizBrain.isFinished()) {
+                  if (quizBrain.isFinished(quizChallenge)) {
                     quizBrain.reset();
                   } else {
-                    quizBrain.nextQuestion();
+                    quizBrain.nextQuestion(quizChallenge);
                   }
                 });
               }) : null),
@@ -207,12 +206,12 @@ class _MainQuizViewState extends State<MainQuizView> {
               ),
 
               child: Text(
-                quizBrain.getQuestionOptions()[buttonNumber],
+                quizBrain.getQuestionOptions(quizChallenge)[buttonNumber],
                 style: TextStyle(fontSize: 24),
               ),
               onPressed: areActionsEnabled ? () => setState(() {
                 areActionsEnabled = false;
-                isCorrect = checkAnswer(quizBrain.getQuestionOptions()[buttonNumber]);
+                isCorrect = checkAnswer(quizBrain.getQuestionOptions(quizChallenge)[buttonNumber]);
                 print(isCorrect);
                 if (isCorrect) {
                   thirdButtonColorDefault = correctAnswerColor;
@@ -226,10 +225,10 @@ class _MainQuizViewState extends State<MainQuizView> {
                   setState(() {
                     thirdButtonColorDefault = defaultButtonColor;
                   });
-                  if (quizBrain.isFinished()) {
+                  if (quizBrain.isFinished(quizChallenge)) {
                     quizBrain.reset();
                   } else {
-                    quizBrain.nextQuestion();
+                    quizBrain.nextQuestion(quizChallenge);
                   }
                 });
               }) : null),
@@ -255,12 +254,12 @@ class _MainQuizViewState extends State<MainQuizView> {
               ),
 
               child: Text(
-                quizBrain.getQuestionOptions()[buttonNumber],
+                quizBrain.getQuestionOptions(quizChallenge)[buttonNumber],
                 style: TextStyle(fontSize: 24),
               ),
               onPressed: areActionsEnabled ? () => setState(() {
                 areActionsEnabled = false;
-                isCorrect = checkAnswer(quizBrain.getQuestionOptions()[buttonNumber]);
+                isCorrect = checkAnswer(quizBrain.getQuestionOptions(quizChallenge)[buttonNumber]);
                 print(isCorrect);
                 if (isCorrect) {
                   forthButtonColorDefault = correctAnswerColor;
@@ -274,10 +273,10 @@ class _MainQuizViewState extends State<MainQuizView> {
                   setState(() {
                     forthButtonColorDefault = defaultButtonColor;
                   });
-                  if (quizBrain.isFinished()) {
+                  if (quizBrain.isFinished(quizChallenge)) {
                     quizBrain.reset();
                   } else {
-                    quizBrain.nextQuestion();
+                    quizBrain.nextQuestion(quizChallenge);
                   }
                 });
               }) : null),

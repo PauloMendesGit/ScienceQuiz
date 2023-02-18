@@ -25,30 +25,60 @@ class QuizBrain {
     Question('Which physics law is known as the "law of action and reaction?"', ["Newton's First Law", "Newton's Third Law", "Newton's Second Law", "Murphy's Law"], "Newton's Third Law"),
     Question('What does the "N" stand for in DNA?', ["Nucleic", "Nesting", "Neutrino", "Neo-Alkane"], "Nucleic"),
     Question('The ongoing mass extinction event caused by human activity is known as _.', ["Olson's Extinction", "Holocene Extinction", "Mulde Event", "Great Oxygenation Event"], "Holocene Extinction"),
+    Question("What is the smallest planet in our solar system?", ["Mars", "Mercury", "Venus", "Pluto"], "Mercury"),
+    Question("What is the chemical symbol for the element gold?", ["Au", "G", "Go", "Ag"], "Au"),
+    Question("What is the study of earthquakes called?", ["Seismology", "Meteorology", "Astronomy", "Hydrology"], "Seismology"),
+    Question("What is the largest organ in the human body?", ["Liver", "Heart", "Skin", "Brain"], "Skin"),
+    Question("What is the name of the process by which plants make their own food?", ["Photosynthesis", "Metabolism", "Respiration", "Transpiration"], "Photosynthesis"),
+    Question("What is the energy source for most living organisms on Earth?", ["Nuclear energy", "Solar energy", "Wind energy", "Chemical energy from food"], "Chemical energy from food"),
+    Question("What is the term for the study of ancient life and fossils?", ["Paleontology", "Anthropology", "Archaeology", "Ethnology"], "Paleontology"),
+    Question("What is the study of stars and galaxies called?", ["Astrophysics", "Cosmology", "Astrobiology", "Stellarology"], "Astrophysics"),
+    Question("What is the term for the study of insects?", ["Entomology", "Herpetology", "Ichthyology", "Ornithology"], "Entomology"),
+    Question("What is the name of the first man to walk on the moon?", ["Neil Armstrong", "Buzz Aldrin", "Michael Collins", "Alan Shepard"], "Neil Armstrong"),
+    Question("What is the largest planet in our solar system?", ["Jupiter", "Saturn", "Uranus", "Neptune"], "Jupiter"),
+    Question("What is the name of the process by which living organisms produce offspring?", ["Reproduction", "Metamorphosis", "Regeneration", "Evolution"], "Reproduction"),
+    Question("What is the term for the study of fossils and ancient life?", ["Paleontology", "Archeology", "Anthropology", "Geology"], "Paleontology"),
+    Question("What is the name of the force that keeps objects in orbit around a planet?", ["Gravity", "Lift", "Thrust", "Drag"], "Gravity"),
+    Question("What is the name of the first vaccine developed against smallpox?", ["Variolation", "Jennerization", "Pasteurization", "Immunization"], "Jennerization"),
+    Question("What is the term for the study of the Earth's crust, structure, and composition?", ["Geology", "Oceanography", "Meteorology", "Seismology"], "Geology"),
+    Question("What is the name of the part of the cell that contains genetic information?", ["Mitochondria", "Nucleus", "Ribosome", "Endoplasmic reticulum"], "Nucleus"),
+    Question("What is the term for the study of plants?", ["Botany", "Zoology", "Mycology", "Entomology"], "Botany"),
+    Question("What is the term for the study of the weather and climate?", ["Meteorology", "Oceanography", "Hydrology", "Seismology"], "Meteorology"),
+    Question("What is the name of the unit used to measure an object's weight?", ["Newton", "Joule", "Watt", "Kilogram"], "Newton"),
+    Question("What is the term for the study of the structure and function of living organisms?", ["Biology", "Zoology", "Botany", "Microbiology"], "Biology"),
+    Question("What is the name of the process by which water evaporates and becomes a gas?", ["Condensation", "Evaporation", "Sublimation", "Melting"], "Evaporation"),
+    Question("What is the term for the study of the behavior and mental processes of animals?", ["Ethology", "Herpetology", "Ornithology", "Psychology"], "Ethology"),
+    Question("What is the name of the structure that acts as the control center of a cell?", ["Mitochondria", "Nucleus", "Ribosome", "Endoplasmic reticulum"], "Nucleus"),
+    Question("What is the name of the planet closest to the sun?", ["Mercury", "Venus", "Mars", "Jupiter"], "Mercury")
   ];
 
-  void nextQuestion() {
-    if (_questionNumber < _questionBank.length - 1) {
+  List<Question> getQuizChallenge(int numberOfQuestions) {
+    _questionBank.shuffle();
+    return _questionBank.sublist(0, numberOfQuestions);
+  }
+
+    void nextQuestion(List<Question> quizChallenge) {
+    if (_questionNumber < quizChallenge.length - 1) {
       _questionNumber++;
     }
   }
 
-  String getQuestionText() {
-    return _questionBank[_questionNumber].questionText;
+  String getQuestionText(List<Question> quizChallenge) {
+    return quizChallenge[_questionNumber].questionText;
   }
 
-  List<String> getQuestionOptions() {
-    return _questionBank[_questionNumber].questionOptions;
+  List<String> getQuestionOptions(List<Question> quizChallenge) {
+    return quizChallenge[_questionNumber].questionOptions;
   }
 
-  String getCorrectAnswer() {
-    return _questionBank[_questionNumber].questionAnswer;
+  String getCorrectAnswer(List<Question> quizChallenge) {
+    return quizChallenge[_questionNumber].questionAnswer;
   }
 
   //TODO: - Create a method called isFinished() here that checks to see if we have reached the last question. It should return (have an output) true if we've reached the last question and it should return false if we're not there yet.
 
-  bool isFinished() {
-    if (_questionNumber >= _questionBank.length - 1) {
+  bool isFinished(List<Question> quizChallenge) {
+    if (_questionNumber >= quizChallenge.length - 1) {
       //TODO: - Use a print statement to check that isFinished is returning true when you are indeed at the end of the quiz and when a restart should happen.
 
       print('Now returning true');

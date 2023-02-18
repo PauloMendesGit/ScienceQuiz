@@ -1,15 +1,8 @@
+/*
 import 'package:flutter/material.dart';
+import 'QuizViews/main_quiz_view.dart';
 import 'main.dart';
 import 'dart:async';
-
-class AnswerButton extends StatefulWidget {
-  final int answerNumber;
-
-  const AnswerButton({Key? key, required this.answerNumber}) : super(key: key);
-
-  @override
-  _AnswerButtonState createState() => _AnswerButtonState();
-}
 
 class _AnswerButtonState extends State<AnswerButton> {
   final Color correctAnswerColor = const Color.fromRGBO(0, 190, 180, 1);
@@ -48,7 +41,7 @@ class _AnswerButtonState extends State<AnswerButton> {
                     }),
               ),
               onPressed: () => setState(() {
-                isCorrect = checkAnswer(quizBrain.getQuestionOptions()[widget.answerNumber]);
+                isCorrect = checkAnswer(quizBrain.getQuestionOptions(quizChallenge)[widget.answerNumber]);
                 print(isCorrect);
                 if (isCorrect) {
                   currentButtonColor = correctAnswerColor;
@@ -59,10 +52,10 @@ class _AnswerButtonState extends State<AnswerButton> {
                 Timer(const Duration(seconds: 2), () {
                   print('Next Question Please');
                   currentButtonColor = defaultButtonColor;
-                  if (quizBrain.isFinished()) {
+                  if (quizBrain.isFinished(quizChallenge)) {
                     quizBrain.reset();
                   } else {
-                    quizBrain.nextQuestion();
+                    quizBrain.nextQuestion(quizChallenge);
                   }
                   setState(() {});
                 });
@@ -74,3 +67,13 @@ class _AnswerButtonState extends State<AnswerButton> {
             )));
   }
 }
+
+
+class AnswerButton extends StatefulWidget {
+  final int answerNumber;
+
+  const AnswerButton({Key? key, required this.answerNumber}) : super(key: key);
+  @override
+  _AnswerButtonState createState() => _AnswerButtonState();
+}
+*/
